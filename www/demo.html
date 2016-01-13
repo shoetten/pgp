@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Why PGP?</title>
+
+  <!-- jQuery -->
+  <script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
+	
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+	
+<div class="container">
+  <h1>Warum Emails signieren & verschlüsseln?</h1>
+  
+  <section>
+    <h2>Mail Spoofing</h2>
+    <form action="send.php" class="form-horizontal" id="mail-spoofer">
+      <div class="form-group row">
+        <label class="col-sm-2 control-label">From:</label>
+        <div class="col-sm-5"><input type="email" class="form-control" name="fromEmail" id="fromEmail" placeholder="From: Email"></div>
+        <div class="col-sm-5"><input type="text" class="form-control" name="fromName" id="fromName" placeholder="From: Name"></div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 control-label">To:</label>
+        <div class="col-sm-5"><input type="email" class="form-control" name="toEmail" id="toEmail" placeholder="To: Email"></div>
+        <div class="col-sm-5"><input type="text" class="form-control" name="toName" id="toName" placeholder="To: Name"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="subject">Subject</label>
+        <div class="col-sm-10"><input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"></div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="content">Content</label>
+        <div class="col-sm-10"><textarea name="content" id="content" class="form-control" rows="3" placeholder="Content"></textarea></div>
+      </div>
+
+      <div id="response" class="alert alert-dismissible" role="alert" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="text"></span>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-default">Submit</button></div>
+      </div>
+      
+    </form>
+  </section>
+</div>
+
+
+<script type="text/javascript">
+  // Attach a submit handler to the form
+  $( "#mail-spoofer" ).submit(function( event ) {
+   
+    // Stop form from submitting normally
+    event.preventDefault();
+   
+    var $form = $(this);   
+    // Send the data using post
+    var posting = $.post( $form.attr( "action" ), $form.serialize() );
+    posting.done(function( data ) {
+      $( "#response .text" ).html( data );
+      $( "#response" ).addClass("alert-success").slideDown();
+    });
+    posting.fail(function( data ) {
+      $( "#response .text" ).html( data );
+      $( "#response" ).addClass("alert-danger").slideDown();
+    });
+
+  });
+</script>
+
+</body>
+</html>

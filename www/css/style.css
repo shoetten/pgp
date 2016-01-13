@@ -1,0 +1,255 @@
+/* line 9, ../../scss/style.scss */
+html {
+  height: 100%;
+}
+
+/* line 13, ../../scss/style.scss */
+body {
+  min-height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, #f0f0f0), color-stop(100%, #bebebe));
+  background-image: -webkit-radial-gradient(#f0f0f0, #bebebe);
+  background-image: -moz-radial-gradient(#f0f0f0, #bebebe);
+  background-image: -o-radial-gradient(#f0f0f0, #bebebe);
+  background-image: radial-gradient(#f0f0f0, #bebebe);
+}
+
+/* line 21, ../../scss/style.scss */
+a {
+  color: #087d3b;
+  text-decoration: none;
+  text-shadow: -1px -1px 2px rgba(100, 100, 100, 0.9);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+/* line 28, ../../scss/style.scss */
+a:hover, a:focus {
+  color: #14974d;
+  background: white;
+  text-shadow: -1px -1px 2px rgba(100, 100, 100, 0.5);
+  text-decoration: none;
+}
+
+/* line 36, ../../scss/style.scss */
+p {
+  margin-bottom: 1em;
+  line-height: 1.5;
+}
+
+/* line 41, ../../scss/style.scss */
+h1 {
+  font-size: 2em;
+}
+
+/* line 45, ../../scss/style.scss */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/**************************
+ * impress styles
+ **************************/
+/* line 54, ../../scss/style.scss */
+.fallback-message {
+  line-height: 1.3;
+  width: 780px;
+  padding: 10px 10px 0;
+  margin: 20px auto;
+  border: 1px solid #af620b;
+  border-radius: 10px;
+  background: #e39a48;
+}
+
+/* line 66, ../../scss/style.scss */
+.impress-supported .fallback-message {
+  display: none;
+}
+
+/* line 70, ../../scss/style.scss */
+.step {
+  position: relative;
+  width: 900px;
+  padding: 40px;
+  margin: 20px auto;
+  font-size: 48px;
+}
+
+/* line 79, ../../scss/style.scss */
+.impress-enabled .step {
+  margin: 0;
+  opacity: 0.4;
+  -webkit-transition: opacity 0.7s;
+  -moz-transition: opacity 0.7s;
+  -o-transition: opacity 0.7s;
+  transition: opacity 0.7s;
+}
+
+/* line 86, ../../scss/style.scss */
+.impress-enabled .step.active {
+  opacity: 1 !important;
+}
+
+/* line 88, ../../scss/style.scss */
+.impress-enabled .substep {
+  opacity: 0;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+/* line 93, ../../scss/style.scss */
+.impress-enabled .substep.active {
+  opacity: 1 !important;
+}
+
+/*
+  when a substep has focus it is 'present'
+  so we add some color to make it all fancy
+*/
+/* line 105, ../../scss/style.scss */
+.slide {
+  display: block;
+  width: 900px;
+  height: 700px;
+  padding: 40px 60px;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+}
+
+/**************************
+ * single slide styles
+ **************************/
+/* line 122, ../../scss/style.scss */
+#start {
+  text-align: center;
+}
+/* line 124, ../../scss/style.scss */
+#start h1 {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+/* line 128, ../../scss/style.scss */
+#start .glyphicon-lock {
+  margin-top: 0.5em;
+  font-size: 4em;
+  color: #0c516e;
+}
+
+/* line 136, ../../scss/style.scss */
+#gpg #gnupg {
+  position: absolute;
+  right: 60px;
+  top: 40px;
+  width: 200px;
+}
+/* line 142, ../../scss/style.scss */
+#gpg section {
+  position: absolute;
+  font-size: 0.32em;
+}
+/* line 147, ../../scss/style.scss */
+#gpg .sign {
+  font-size: 0.4em;
+}
+/* line 151, ../../scss/style.scss */
+#gpg .past.sign {
+  opacity: 0 !important;
+}
+/* line 155, ../../scss/style.scss */
+#gpg #wtf {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.2em 0.4em;
+  color: #af620b;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* line 169, ../../scss/style.scss */
+#postcard {
+  z-index: 9;
+  opacity: 1 !important;
+}
+/* line 172, ../../scss/style.scss */
+#postcard #luca {
+  position: absolute;
+  bottom: 57px;
+  left: 220px;
+  z-index: 10;
+  width: 170px;
+}
+
+/* line 181, ../../scss/style.scss */
+#mailwoman {
+  height: 700px;
+  width: 600px;
+  opacity: 0.1;
+}
+
+/* line 187, ../../scss/style.scss */
+#network {
+  width: 1100px;
+  height: 600px;
+}
+/* line 191, ../../scss/style.scss */
+#network figure {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-box-shadow: 1px 1px 4px rgba(51, 51, 51, 0.7);
+  -moz-box-shadow: 1px 1px 4px rgba(51, 51, 51, 0.7);
+  box-shadow: 1px 1px 4px rgba(51, 51, 51, 0.7);
+  padding: 4% 3%;
+}
+/* line 200, ../../scss/style.scss */
+#network .oval {
+  width: 180px;
+  height: 160px;
+  padding: 3%;
+}
+/* line 205, ../../scss/style.scss */
+#network #post-office1 {
+  left: 30%;
+  top: 0;
+}
+/* line 209, ../../scss/style.scss */
+#network #post-car1 {
+  left: 57%;
+  top: 12%;
+}
+/* line 213, ../../scss/style.scss */
+#network #post-office2 {
+  right: 0%;
+  top: 30%;
+}
+/* line 217, ../../scss/style.scss */
+#network #mailbox {
+  right: 30%;
+  bottom: 0;
+}
+
+/* line 224, ../../scss/style.scss */
+#credits {
+  font-size: 2.8em;
+}
