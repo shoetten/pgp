@@ -11,8 +11,8 @@
 http_path = "/"
 
 # 2. probably don't need to touch these
-path = "www"
-sass_dir = "scss"
+path = ""
+sass_dir = "/scss"
 css_dir = path + "/css"
 images_dir = path + "/img"
 javascripts_dir = path + "/js"

@@ -1,0 +1,20 @@
+{
+  "name": "pgp-workshop",
+  "version": "0.0.1",
+  "description": "About email security and PGP",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shoetten/pgp.git"
+  },
+  "keywords": [
+    "pgp",
+    "email",
+    "spoofing"
+  ],
+  "author": "Simon Hötten <simon@hoetten.org>",
+  "license": "CC-BY-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/shoetten/pgp/issues"
+  },
+  "homepage": "https://github.com/shoetten/pgp#readme"
+}

@@ -1,0 +1,15 @@
+{
+    "name": "shoetten/pgp-workshop",
+    "description": "About email security and PGP",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^5.2"
+    },
+    "license": "CC-BY-SA-4.0",
+    "authors": [
+        {
+            "name": "shoetten",
+            "email": "simon@hoetten.org"
+        }
+    ]
+}
