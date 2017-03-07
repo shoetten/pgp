@@ -11,7 +11,7 @@
  *
  * ------------------------------------------------
  *  author:  Bartek Szopka
- *  version: 0.5.3
+ *  version: 0.6.0
  *  url:     http://bartaz.github.com/impress.js/
  *  source:  http://github.com/bartaz/impress.js/
  */
@@ -56,7 +56,7 @@
 
     } )();
 
-    // `arraify` takes an array-like object and turns it into real Array
+    // `arrayify` takes an array-like object and turns it into real Array
     // to make all the Array.prototype goodness available.
     var arrayify = function( a ) {
         return [].slice.call( a );
@@ -133,11 +133,6 @@
         return " scale(" + s + ") ";
     };
 
-    // `perspective` builds a perspective transform string for given data.
-    var perspective = function( p ) {
-        return " perspective(" + p + "px) ";
-    };
-
     // `getElementFromHash` returns an element located by id from hash part of
     // window location.
     var getElementFromHash = function() {
@@ -163,6 +158,74 @@
         }
 
         return scale;
+    };
+
+    // SUBSTEPS
+    
+    // Simple helper to list any substeps within an element
+    var getSubsteps = function (element) {
+        return $$(".substep", element);
+    };
+     var getPresentSubstep = function (element) {
+        return $(".present", element);
+    };
+    // Returns the first substep element marked as future
+    // or false if there are no future substeps
+    var getNextSubstep = function(element) {
+        var result = false;
+        var substeps = getSubsteps(element);
+        if (substeps.length > 0) {
+            var futureSubsteps = $$(".future", element);
+            if (futureSubsteps.length > 0) {
+                result = futureSubsteps[0];
+            }
+        }
+        return result;
+    }
+    // Returns the last substep element marked as past
+    // or false if there are no past substeps
+    var getPreviousSubstep = function(element) {
+        var result = false;
+        var substeps = getSubsteps(element);
+        if (substeps.length > 0) {
+            var pastSubsteps = $$(".past", element);
+            if (pastSubsteps.length > 0) {
+                result = pastSubsteps[pastSubsteps.length - 1];
+            }
+        }
+        return result;
+    }
+    // helper for navigation forward a substep
+    var substepForward = function (element) {
+        if (getPresentSubstep(element)) {
+            var presentSubstep = getPresentSubstep(element);
+            presentSubstep.classList.remove("present");
+            presentSubstep.classList.add("past");
+            triggerEvent(presentSubstep, "impress:substep-exit");
+        }
+        var nextSubstep = getNextSubstep(element);
+        nextSubstep.classList.remove("future");
+        nextSubstep.classList.add("present");
+        nextSubstep.classList.add("active");
+        // trigger events
+        triggerEvent(nextSubstep, "impress:substep-active");
+        triggerEvent(nextSubstep, "impress:substep-enter");
+    }
+    // helper for navigation back a substep
+    var substepBackward = function (element) {
+        var presentSubstep = getPresentSubstep(element);
+        presentSubstep.classList.remove("present");
+        presentSubstep.classList.add("future");
+        presentSubstep.classList.remove("active");
+        // trigger events
+        triggerEvent(presentSubstep, "impress:substep-inactive");
+        triggerEvent(presentSubstep, "impress:substep-exit");
+         if (getPreviousSubstep(element)) {
+            var previousSubstep = getPreviousSubstep(element);
+            previousSubstep.classList.remove("past");
+            previousSubstep.classList.add("present");
+            triggerEvent(previousSubstep, "impress:substep-enter");
+        }
     };
 
     // CHECK SUPPORT
@@ -329,6 +392,15 @@
                            scale( step.scale ),
                 transformStyle: "preserve-3d"
             } );
+
+            // need to prepare substeps with 'future'
+            if (getSubsteps(el).length > 0) {
+                getSubsteps(el).forEach(
+                    function(substep){
+                        substep.classList.add("future");
+                    }
+                );
+            }
         };
 
         // `init` API function that initializes (and runs) the presentation.
@@ -384,7 +456,8 @@
             css( root, {
                 top: "50%",
                 left: "50%",
-                transform: perspective( config.perspective / windowScale ) + scale( windowScale )
+                perspective: ( config.perspective / windowScale ) + "px",
+                transform: scale( windowScale )
             } );
             css( canvas, rootStyles );
 
@@ -504,9 +577,13 @@
             // that both of them are finished.
             css( root, {
 
+                // For IE 11 support we must specify perspective independent
+                // of transform.
+                perspective: ( config.perspective / targetScale ) + "px",
+
                 // To keep the perspective look similar for different scales
                 // we need to 'scale' the perspective, too
-                transform: perspective( config.perspective / targetScale ) + scale( targetScale ),
+                transform: scale( targetScale ),
                 transitionDuration: duration + "ms",
                 transitionDelay: ( zoomin ? delay : 0 ) + "ms"
             } );
@@ -569,19 +646,34 @@
         };
 
         // `prev` API function goes to previous step (in document order)
+        // or backs up one stubstep if a present substep is found
         var prev = function() {
-            var prev = steps.indexOf( activeStep ) - 1;
-            prev = prev >= 0 ? steps[ prev ] : steps[ steps.length - 1 ];
-
-            return goto( prev );
+            if (getPresentSubstep(activeStep)) {
+                // if this step has a substep in present state
+                // substepBackward. This is not exposed in API
+                // because substeps cannot be deep linked
+                substepBackward(activeStep);
+            } else  {
+                // when no present substep goto previous step
+                var prev = steps.indexOf( activeStep ) - 1;
+                prev = prev >= 0 ? steps[ prev ] : steps[ steps.length-1 ];
+                return goto(prev);
+            }
         };
 
         // `next` API function goes to next step (in document order)
         var next = function() {
-            var next = steps.indexOf( activeStep ) + 1;
-            next = next < steps.length ? steps[ next ] : steps[ 0 ];
-
-            return goto( next );
+            if (getNextSubstep(activeStep)) {
+                // if a future substep is found in this step
+                // substepForward.  This is not exposed in API
+                // because substeps cannot be deep linked
+                substepForward(activeStep);
+            } else {
+                // when no future substeps are available goto next step
+                var next = steps.indexOf( activeStep ) + 1;
+                next = next < steps.length ? steps[ next ] : steps[ 0 ];
+                return goto(next);
+            }
         };
 
         // Adding some useful classes to step elements.
