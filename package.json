@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/shoetten/pgp/issues"
   },
-  "homepage": "https://github.com/shoetten/pgp#readme"
+  "homepage": "https://github.com/shoetten/pgp#readme",
+  "devDependencies": {
+    "eslint": "^4.18.2"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1"
+  }
 }
