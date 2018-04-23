@@ -26,7 +26,7 @@ $mail->addReplyTo($fromEmail, $fromName);
 $mail->addAddress($toEmail, $toName);     // Add a recipient
 
 $mail->Subject = $subject;
-$mail->Body    = $content;
+$mail->Body = $content;
 
 if(!$mail->send()) {
     echo 'Message could not be sent.<br />Mailer Error: ' . $mail->ErrorInfo;

@@ -11,8 +11,8 @@
 
   <!-- Bootstrap -->
   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+  
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
@@ -26,8 +26,28 @@
 
 <div id="impress">
 
+  <div id="tops" class="step slide" data-x="-1000" data-y="0" data-rotate="-10">
+    <h1>
+      TOPs
+    </h1>
+    <ol>
+      <li>Einleitung</li>
+      <li>Input zur Überwachung bei E-Mails</li>
+      <li>Gruppendiskussion zu
+        <ul>
+          <li>Umgang mit E-Mail Verschlüsselung</li>
+          <li>Soll die Mailingliste verschlüsselt werden?</li>
+        </ul>
+      </li>
+      <li>Praktische Umsetzung von E-Mail Verschlüsselung</li>
+      <li>Feedbackrunde</li>
+    </ol>
+  </div>
+
   <div id="start" class="step slide" data-x="0" data-y="0" data-rotate="-10">
-    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+    <svg class="icon lock" xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 24 24">
+      <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+    </svg>
     <h1>
       Email-Sicherheit?!
     </h1>
@@ -40,22 +60,90 @@
   <div id="mailwoman" class="step" data-x="1150" data-y="100" data-rotate="0" data-scale="1.2">
     <img src="img/brieftraegerin.png" alt="Briefträgerin">
   </div>
+
   <div id="network" class="step" data-x="3200" data-y="400" data-rotate="0" data-scale="5">
-    <figure id="post-office1"><img src="img/post-office.gif" alt="Postamt"></figure>
-    <figure id="post-car1" class="oval"><img src="img/post-car.gif" alt="Postauto"></figure>
-    <figure id="post-office2"><img src="img/post-office.gif" alt="Postamt"></figure>
-    <figure id="mailbox"><img src="img/mailbox.gif" alt="Briefkasten"></figure>
+      <svg id="lines"></svg>
+
+    <figure id="post-office1" class="post-office1">
+      <img src="img/post-office.gif" alt="Postamt">
+    </figure>
+    <figure class="post-car1" class="oval"><img src="img/post-car.gif" alt="Postauto"></figure>
+    <figure id="post-office2" class="post-office2">
+      <img src="img/post-office.gif" alt="Postamt">
+    </figure>
+    <figure id="mailbox" class="mailbox">
+      <img src="img/mailbox.gif" alt="Briefkasten">
+    </figure>
+
+    <div class="substep">
+      <figure class="post-office1">
+        <img src="img/logo-webde.png" alt="WEB.DE Logo">
+      </figure>
+      <figure class="post-car1" class="oval">
+        <img src="img/post-car.gif" alt="Postauto">
+      </figure>
+      <figure class="post-office2">
+        <img src="img/server.png" alt="Server">
+      </figure>
+      <figure class="mailbox">
+        <img src="img/riseup-rainbow.png" alt="Riseup Logo">
+      </figure>
+    </div>
   </div>
 
 
   <div id="spoofing" class="step slide" data-x="0" data-y="2000" data-rotate="0" data-scale="1">
     <h1>Mail-Spoofing</h1>
 
+    <form action="send.php" class="form-horizontal" id="mail-spoofer">
+        <div class="form-group form-row">
+          <label class="col">From</label>
+          <div class="col"><input type="text" class="form-control" name="fromEmail" id="fromEmail" placeholder="From: Email"></div>
+          <div class="col"><input type="text" class="form-control" name="fromName" id="fromName" placeholder="From: Name"></div>
+        </div>
+  
+        <div class="form-group form-row">
+          <label class="col">To</label>
+          <div class="col"><input type="text" class="form-control" name="toEmail" id="toEmail" placeholder="To: Email"></div>
+          <div class="col"><input type="text" class="form-control" name="toName" id="toName" placeholder="To: Name"></div>
+        </div>
+  
+        <div class="form-group form-row">
+          <label class="col-sm-2" for="subject">Subject</label>
+          <div class="col-sm-10"><input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"></div>
+        </div>
+        
+        <div class="form-group form-row">
+          <label class="col-sm-2" for="content">Content</label>
+          <div class="col-sm-10"><textarea name="content" id="content" class="form-control" rows="3" placeholder="Content"></textarea></div>
+        </div>
+  
+        <div id="response" class="alert alert-dismissible" role="alert" style="display:none;">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span class="text"></span>
+        </div>
+  
+        <div class="form-group row">
+          <div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-primary">Submit</button></div>
+        </div>
+        
+      </form>
   </div>
 
+  <div id="why-encrypt" class="step slide" data-x="1000" data-y="2000">
+    <h1>Warum verschlüsseln?</h1>
+    <ul>
+      <li class="substep">In der Praxis noch einfacher zu überwachen als Postkarten</li>
+      <li class="substep"><em>Eine</em> verschlüsselte Mail erregt Verdacht, eine von <em>vielen</em> Mails nicht</li>
+      <li class="substep">E-Mail Überwachung in Deutschland nimmt stetig zu</li>
+    </ul>
+  </div>
 
+  <div class="step slide" data-x="0" data-y="3000">
+    <img src="img/email-survailance.jpg" alt="E-Mail Überwachung">
+  </div>
 
-  <div id="gpg" class="step slide" data-x="1000" data-y="2000" data-rotate="0">
+  <div id="gpg" class="step slide" data-x="1000" data-y="3000" data-rotate="0">
     <img id="gnupg" src="img/gnupg.png" alt="GnuPG">
     <section class="substep sign">
       <p>-----BEGIN PGP SIGNED MESSAGE-----<br>
@@ -111,24 +199,110 @@
       =ZYUW<br>
       -----END PGP MESSAGE-----
     </section>
-    <h1 id="wtf" class="substep">
+    <h1 id="wtf" class="substep display-1">
       Hä?!
     </h1>
   </div>
 
+  <div class="step slide" data-x="2000" data-y="3000">
+    <img src="img/email-survailance-error.jpg" alt="E-Mail Überwachung">
+  </div>
+
+  <div id="encrypt-capabilities" class="step slide" data-x="3000" data-y="3000">
+    <h1>Was kann OpenPGP?</h1>
+    <ol>
+      <li class="substep"><em>Ver- / Entschlüsseln</em>
+        <ul>
+          <li>Die Mail kann nur von der/dem Empfänger*in gelesen werden</li>
+        </ul>
+      </li>
+      <li class="substep"><em>Signieren / Verifizieren</em>
+        <ul>
+          <li>Die Identität der/des Absender*in ist gesichert</li>
+          <li class="substep">Die Mail wurde nicht verändert</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div id="pgp-what" class="step slide" data-x="4000" data-y="3000">
+    <h1>Begriffe, Begriffe..</h1>
+    <table class="table">
+      <tr>
+        <th>OpenPGP</th>
+        <td>Pretty Good Privacy, Standard für E-Mailverschlüsselung</td>
+      </tr>
+      <tr>
+        <th>GPG</th>
+        <td>Gnu Privacy Guard, OpenPGP als ausführbares Programm</td>
+      </tr>
+      <tr>
+        <th>Fingerabdruck</th>
+        <td>Eindeutiges Identifikationsmerkmal eines Schlüsselpaars („Fingerprint“ / „ID“), z.B. für gegenseitigen Abgleich</td>
+      </tr>
+      <tr>
+        <th>Enigmail</th>
+        <td>Thunderbird-Plugin,	Verbindet Thunderbird mit „dem Arbeitspferd“ GPG</td>
+      </tr>
+    </table>	
+  </div>
+
+  <div id="encrypt-keypair" class="step slide" data-x="5000" data-y="3000">
+    <h1>Das Schlüsselpaar</h1>
+    <img src="img/workshop-emailverschluesselung-grafiken.png" alt="Schlüsselpaar">
+  </div>
+
+  <div id="encrypt-caveats" class="step slide" data-x="6000" data-y="3000">
+    <h1>Hinweise</h1>
+    <ul>
+      <li class="substep">Betreff nicht verschlüsselt</li>
+      <li class="substep">Empfänger*innen und andere Metadaten immer noch sichtbar</li>
+      <li class="substep">Verschlüsselung nur so sicher wie..
+        <ul>
+          <li>die Endgeräte <em class="substep">-> Macht eure Updates!!</em></li>
+          <li class="substep">das gewählte Passwort</li>
+        </ul>
+      </li>
+      <li class="substep">Mehrere Identitäten eines Schlüssels sind öffentlich</li>
+      <li class="substep">Privaten Schlüssel sichern!</li>
+    </ul>
+  </div>
 
   <div id="credits" class="step slide" data-x="5000" data-y="5000" data-rotate="0">
     <h2>Bildnachweise</h2>
-    <p>Briefträgerin, Postamt, Briefkasten und Postauto von <a href="https://bilder.tibs.at/index.php?page_id=6&img=24110">Education Group GmbH</a> unter <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/" title=" Creative Commons Namensnennung-NichtKommerziell-Weitergabe unter gleichen Bedingungen 3.0 Österreich Lizenz">CC-BY-NC-SA 3.0</a></p>
+    <p>Briefträgerin, Postamt, Briefkasten und Postauto von <a href="https://bilder.tibs.at/index.php?page_id=6&img=24110">Education Group GmbH</a> unter <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/" title="Creative Commons Namensnennung-NichtKommerziell-Weitergabe unter gleichen Bedingungen 3.0 Österreich Lizenz">CC-BY-NC-SA 3.0</a></p>
+    <p>Server von <a href="http://pngimg.com/download/25931">pngimg.com</a> unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons 4.0 BY-NC</a></p>
+  </div>
+
+  <div id="mobile" class="step slide"  data-x="6000" data-y="5000">
+    <h1>IMSI, IMEI</h1>
+    <table class="table">
+      <tr>
+        <th>IMSI</th>
+        <td>
+          <em>International Mobile Subscriber Identity</em><br>
+          Auf SIM Karte gespeichert. Eindeutige Identifizierung von Netzteilnehmer*innen
+        </td>
+      </tr>
+      <tr>
+        <th>IMEI</th>
+        <td>
+          <em>International Mobile Equipment Identity</em><br>
+          Eindeutige 15-stellige Seriennummer, anhand derer jedes Handy weltweit eindeutig identifiziert werden kann.
+        </td>
+      </tr>
+    </table>
   </div>
 
 </div>
 
 <!-- impress.js -->
-<script src="js/impress.js" type="text/javascript""></script>
+<script src="js/impress.js" type="text/javascript"></script>
 <script type="text/javascript">
   impress().init();
 </script>
+
+<script src="js/main.js" type="text/javascript"></script>
 
 </body>
 </html>
