@@ -3,7 +3,7 @@
     "description": "About email security and PGP",
     "type": "project",
     "require": {
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^6.1"
     },
     "license": "CC-BY-SA-4.0",
     "authors": [
